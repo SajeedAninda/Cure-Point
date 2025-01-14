@@ -5,7 +5,7 @@ import { PiQuotesFill } from 'react-icons/pi'
 const PatientSays = () => {
   return (
     <div>
-      <div className='w-[90%] lg:w-[1150px] mx-auto'>
+      <div className='w-[90%] lg:w-[1150px] mx-auto my-28'>
         <div className='flex justify-center flex-col items-center text-center'>
           <h1 className='text-[40px] font-bold text-[#1e1e1e]'>
             What Our Patients Says
