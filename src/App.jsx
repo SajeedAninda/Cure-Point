@@ -7,6 +7,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Homepage></Homepage>
+    
     </>
   )
 }
