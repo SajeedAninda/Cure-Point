@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import logo from '../../src/assets/logo.png'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -41,9 +42,9 @@ const Navbar = () => {
           <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             Appointment
           </li>
-          <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
+          <Link to={"/login"} className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             Login
-          </li>
+          </Link>
         </div>
       </div>
     </div>
