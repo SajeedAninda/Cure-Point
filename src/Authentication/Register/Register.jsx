@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import loginVector from '../../assets/login-vector.png'
 import loginBg from '../../assets/loginBg.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { AuthContext } from '../AuthProvider/AuthProvider'
 
 const Register = () => {
-  let { registerUser, loading, signOut } = useContext(AuthContext)
+  let { registerUser, loading, logOut } = useContext(AuthContext)
+  let navigate = useNavigate();
+
   const handleRegister = e => {
     e.preventDefault()
 
@@ -26,10 +28,29 @@ const Register = () => {
     }
 
     if (name && userName && email && password) {
-      registerUser(email, password).then(userCredential => {
-        const user = userCredential.user
-        console.log(user)
-      })
+        registerUser(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("User registered:", user);
+      
+          logOut()
+            .then(() => {
+              console.log("After Sign Up Logged out user to login again");
+              Swal.fire(
+                "Registration Successful!",
+                "Please login with your email and password.",
+                "success"
+              );
+              navigate("/login");
+            })
+            .catch((error) => {
+              console.error("Error logging out:", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error during registration:", error);
+        });
+      
     }
   }
 
