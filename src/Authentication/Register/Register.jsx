@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import loginVector from '../../assets/login-vector.png'
 import loginBg from '../../assets/loginBg.png'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { AuthContext } from '../AuthProvider/AuthProvider'
 
 const Register = () => {
+  let { registerUser, loading, signOut } = useContext(AuthContext)
   const handleRegister = e => {
     e.preventDefault()
 
@@ -24,9 +26,9 @@ const Register = () => {
     }
 
     if (name && userName && email && password) {
-      Swal.fire({
-        title: 'Registered Successfully!',
-        icon: 'success'
+      registerUser(email, password).then(userCredential => {
+        const user = userCredential.user
+        console.log(user)
       })
     }
   }

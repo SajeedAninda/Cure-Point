@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [])
 
-  authInfo = {
+  let authInfo = {
     user,
     loading,
     registerUser,
