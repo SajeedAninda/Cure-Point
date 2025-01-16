@@ -6,7 +6,8 @@ import Swal from 'sweetalert2'
 import { AuthContext } from '../AuthProvider/AuthProvider'
 
 const Register = () => {
-  let { registerUser, loading, logOut } = useContext(AuthContext)
+  let { registerUser, loading, logOut, updateUserProfile } =
+    useContext(AuthContext)
   let navigate = useNavigate()
 
   const handleRegister = e => {
@@ -27,30 +28,30 @@ const Register = () => {
       return
     }
 
-    if (name && userName && email && password) {
-      registerUser(email, password)
-        .then(userCredential => {
-          const user = userCredential.user
-          console.log('User registered:', user)
-
-          logOut()
-            .then(() => {
-              console.log('After Sign Up Logged out user to login again')
-              Swal.fire({
-                title: 'Registration Succesfull',
-                text: 'Please Login Now.',
-                icon: 'success'
-              })
-              navigate('/login')
-            })
-            .catch(error => {
-              console.error('Error logging out:', error)
-            })
+    registerUser(email, password)
+      .then(userCredential => {
+        const user = userCredential.user
+        console.log('User registered:', user)
+        updateUserProfile(name, userName).then(() => {
+          'User Info Updated'
         })
-        .catch(error => {
-          console.error('Error during registration:', error)
-        })
-    }
+        logOut()
+          .then(() => {
+            console.log('After Sign Up Logged out user to login again')
+            Swal.fire({
+              title: 'Registration Succesfull',
+              text: 'Please Login Now.',
+              icon: 'success'
+            })
+            navigate('/login')
+          })
+          .catch(error => {
+            console.error('Error logging out:', error)
+          })
+      })
+      .catch(error => {
+        console.error('Error during registration:', error)
+      })
   }
 
   return (
