@@ -1,22 +1,42 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import loginVector from '../../assets/login-vector.png'
 import loginBg from '../../assets/loginBg.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { AuthContext } from '../AuthProvider/AuthProvider'
 
 const Login = () => {
+  let { signIn } = useContext(AuthContext)
+  let navigate = useNavigate()
+
   const handleLogin = e => {
     e.preventDefault()
     let email = e.target.email.value
     let password = e.target.password.value
     console.log(email, password)
 
-    if ((email, password)) {
-      Swal.fire({
-        title: 'Logged In Succesfully!',
-        icon: 'success'
+    signIn(email, password)
+      .then(userCredential => {
+        const user = userCredential.user
+        console.log(user)
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successfull',
+          text: 'You Have Succesfully Logged In'
+        })
+        navigate('/')
       })
-    }
+      .catch(error => {
+        let errorCode = error.code
+        console.log(errorCode)
+        if (errorCode === 'auth/invalid-credential') {
+          return Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid Email or Password!'
+          })
+        }
+      })
   }
 
   return (

@@ -7,7 +7,7 @@ import { AuthContext } from '../AuthProvider/AuthProvider'
 
 const Register = () => {
   let { registerUser, loading, logOut } = useContext(AuthContext)
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   const handleRegister = e => {
     e.preventDefault()
@@ -28,29 +28,28 @@ const Register = () => {
     }
 
     if (name && userName && email && password) {
-        registerUser(email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("User registered:", user);
-      
+      registerUser(email, password)
+        .then(userCredential => {
+          const user = userCredential.user
+          console.log('User registered:', user)
+
           logOut()
             .then(() => {
-              console.log("After Sign Up Logged out user to login again");
-              Swal.fire(
-                "Registration Successful!",
-                "Please login with your email and password.",
-                "success"
-              );
-              navigate("/login");
+              console.log('After Sign Up Logged out user to login again')
+              Swal.fire({
+                title: 'Registration Succesfull',
+                text: 'Please Login Now.',
+                icon: 'success'
+              })
+              navigate('/login')
             })
-            .catch((error) => {
-              console.error("Error logging out:", error);
-            });
+            .catch(error => {
+              console.error('Error logging out:', error)
+            })
         })
-        .catch((error) => {
-          console.error("Error during registration:", error);
-        });
-      
+        .catch(error => {
+          console.error('Error during registration:', error)
+        })
     }
   }
 
