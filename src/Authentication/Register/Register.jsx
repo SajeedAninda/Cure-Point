@@ -12,7 +12,6 @@ const Register = () => {
     const userName = e.target.userName.value
     const email = e.target.email.value
     const password = e.target.password.value
-    
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).+$/
 
     if (!passwordRegex.test(password)) {
