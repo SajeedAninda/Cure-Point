@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import logo from '../../src/assets/logo.png'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  let { user, logOut } = useContext(AuthContext)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +22,11 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  
+  let handleLogout = () => {
+    logOut().then(console.log('Logged Out Done'))
+  }
 
   return (
     <div
@@ -42,9 +49,21 @@ const Navbar = () => {
           <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             Appointment
           </li>
-          <Link to={"/login"} className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
-            Login
-          </Link>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className='transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:text-red-500 hover:underline'
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link
+              to={'/login'}
+              className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
