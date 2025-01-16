@@ -2,6 +2,7 @@ import React from 'react'
 import loginVector from '../../assets/login-vector.png'
 import loginBg from '../../assets/loginBg.png'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const handleLogin = e => {
@@ -9,6 +10,13 @@ const Login = () => {
     let email = e.target.email.value
     let password = e.target.password.value
     console.log(email, password)
+
+    if ((email, password)) {
+      Swal.fire({
+        title: 'Logged In Succesfully!',
+        icon: 'success'
+      })
+    }
   }
 
   return (
@@ -44,6 +52,7 @@ const Login = () => {
               type='email'
               name='email'
               id='email'
+              required
             />
           </div>
 
@@ -61,6 +70,7 @@ const Login = () => {
               type='password'
               name='password'
               id='password'
+              required
             />
           </div>
 
@@ -73,7 +83,10 @@ const Login = () => {
 
           <p className='text-[18px] text-[#1e1e1e] font-semibold mt-6 text-center'>
             Dont Have an Account?{' '}
-            <Link className='text-[#F7A582] pl-1 underline hover:opacity-60' to={'/register'}>
+            <Link
+              className='text-[#F7A582] pl-1 underline hover:opacity-60'
+              to={'/register'}
+            >
               Register
             </Link>
           </p>
