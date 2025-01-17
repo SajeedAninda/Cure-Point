@@ -73,33 +73,82 @@ const Appointment = () => {
 
         <div className='mt-6 grid grid-cols-1 lg:grid-cols-3 gap-12 '>
           <div className='rounded-xl px-12 py-6 flex items-center gap-4 cursor-pointer hover:scale-105 transition-all duration-200 ease-in bg-white gridShadows '>
-            <img className='w-[20%]' src={orthodonticsImg} alt="" />
-            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>Teeth <br /> Orthodontics</h3>
+            <img className='w-[20%]' src={orthodonticsImg} alt='' />
+            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>
+              Teeth <br /> Orthodontics
+            </h3>
           </div>
 
           <div className='rounded-xl px-12 py-6 flex items-center gap-4 cursor-pointer hover:scale-105 transition-all duration-200 ease-in bg-white gridShadows '>
-            <img className='w-[20%]' src={cosmeticImg} alt="" />
-            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>Cosmetic  <br /> Dentistry</h3>
+            <img className='w-[20%]' src={cosmeticImg} alt='' />
+            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>
+              Cosmetic <br /> Dentistry
+            </h3>
           </div>
 
           <div className='rounded-xl px-12 py-6 flex items-center gap-4 cursor-pointer hover:scale-105 transition-all duration-200 ease-in bg-white gridShadows '>
-            <img className='w-[20%]' src={cleaningImg} alt="" />
-            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>Teeth <br /> Cleaning</h3>
+            <img className='w-[20%]' src={cleaningImg} alt='' />
+            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>
+              Teeth <br /> Cleaning
+            </h3>
           </div>
 
           <div className='rounded-xl px-12 py-6 flex items-center gap-4 cursor-pointer hover:scale-105 transition-all duration-200 ease-in bg-white gridShadows '>
-            <img className='w-[20%]' src={cavityImg} alt="" />
-            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>Cavity <br /> Protection</h3>
+            <img className='w-[20%]' src={cavityImg} alt='' />
+            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>
+              Cavity <br /> Protection
+            </h3>
           </div>
 
           <div className='rounded-xl px-12 py-6 flex items-center gap-4 cursor-pointer hover:scale-105 transition-all duration-200 ease-in bg-white gridShadows '>
-            <img className='w-[20%]' src={pediatricImg} alt="" />
-            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>Pediatric <br /> Dental</h3>
+            <img className='w-[20%]' src={pediatricImg} alt='' />
+            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>
+              Pediatric <br /> Dental
+            </h3>
           </div>
 
           <div className='rounded-xl px-12 py-6 flex items-center gap-4 cursor-pointer hover:scale-105 transition-all duration-200 ease-in bg-white gridShadows '>
-            <img className='w-[20%]' src={oralImg} alt="" />
-            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>Oral <br /> Surgery</h3>
+            <img className='w-[20%]' src={oralImg} alt='' />
+            <h3 className='text-[#1e1e1e] w-[60%] font-bold text-[22px]'>
+              Oral <br /> Surgery
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      {/* BOOKING SECTION  */}
+      <div className='w-[95%] lg:w-[1150px] h-full mx-auto pb-32'>
+        <h1 className='text-[32px] text-[#1e1e1e] font-bold py-5 text-center'>
+          Available Slots for {"SelectedTabName"}
+        </h1>
+
+        <div className='mt-6 grid grid-cols-1 lg:grid-cols-3 gap-12 '>
+          <div className='rounded-xl px-12 py-6 flex flex-col justify-center items-center gap-4 cursor-pointer transition-all duration-200 ease-in bg-white gridShadows '>
+            <img className='w-[20%]' src={orthodonticsImg} alt='' />
+            <h3 className='text-[#1e1e1e] font-bold text-[22px] text-center'>
+              Teeth Orthodontics
+            </h3>
+            <p className='text-[#1e1e1e] font-bold text-[16px] text-center mt-2'>
+              8.AM - 9.00 AM
+            </p>
+
+            <button className='text-white text-[16px] font-bold bg-[#F7A582] px-6 py-3 hover:opacity-70 transition-opacity duration-300 ease-in-out rounded-lg mt-4 w-full'>
+              Book Appointment
+            </button>
+          </div>
+
+          <div className='rounded-xl px-12 py-6 flex flex-col justify-center items-center gap-4 cursor-pointer transition-all duration-200 ease-in bg-white gridShadows '>
+            <img className='w-[20%]' src={orthodonticsImg} alt='' />
+            <h3 className='text-[#1e1e1e] font-bold text-[22px] text-center'>
+              Teeth Orthodontics
+            </h3>
+            <p className='text-[#1e1e1e] font-bold text-[16px] text-center mt-2'>
+              12.PM - 1.00 PM
+            </p>
+
+            <button className='text-white text-[16px] font-bold bg-[#F7A582] px-6 py-3 hover:opacity-70 transition-opacity duration-300 ease-in-out rounded-lg mt-4 w-full'>
+              Book Appointment
+            </button>
           </div>
         </div>
       </div>
