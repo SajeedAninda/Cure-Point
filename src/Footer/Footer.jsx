@@ -3,7 +3,7 @@ import footerLogo from '../assets/Footer-logo.png'
 
 const Footer = () => {
   return (
-    <div className='bg-slate-200'>
+    <div className='bg-[#F3F3F3]'>
       <div className='w-[90%] lg:w-[1150px] mx-auto '>
         <div className='grid grid-cols-2 lg:grid-cols-4 justify-between gap-12 py-20 border-b-2 border-gray-300'>
           <div>
