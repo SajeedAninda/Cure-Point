@@ -40,15 +40,15 @@ const Navbar = () => {
         </div>
 
         <div className='links text-white flex items-center gap-12'>
-          <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
+          <Link to={"/"} className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             Home
-          </li>
+          </Link>
           <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             About
           </li>
-          <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
+          <Link to={"/appointment"} className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             Appointment
-          </li>
+          </Link>
           {user ? (
             <button
               onClick={handleLogout}
