@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
+import useAxiosInstance from '../Hooks/useAxiosInstance'
+import Swal from 'sweetalert2'
 
 const Modal = ({
   isOpen,
@@ -11,8 +13,9 @@ const Modal = ({
   if (!isOpen) return null
 
   let { user } = useContext(AuthContext)
+  let axiosInstance = useAxiosInstance()
 
-  let handleAppointment = e => {
+  let handleAppointment = async e => {
     e.preventDefault()
     let name = e.target.name.value
     let phoneNumber = e.target.phoneNumber.value
@@ -25,7 +28,25 @@ const Modal = ({
       selectedDate
     }
 
-    console.log(appointmentDetails)
+    try {
+      let res = await axiosInstance.post('/appointments', appointmentDetails)
+      console.log(res.data)
+
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: 'Appointment Booked',
+          icon: 'success'
+        })
+        onClose() 
+      }
+    } catch (error) {
+      console.error('Error booking appointment:', error)
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to book appointment. Please try again.',
+        icon: 'error'
+      })
+    }
   }
 
   return (
@@ -74,7 +95,9 @@ const Modal = ({
               placeholder='Phone Number'
               className='w-full border rounded-lg px-4 py-2 mt-3 focus:outline-none'
             />
-            <div className='bg-gray-100 rounded-lg px-4 py-2 mt-3'>{user?.email}</div>
+            <div className='bg-gray-100 rounded-lg px-4 py-2 mt-3'>
+              {user?.email}
+            </div>
 
             {/* Submit Button */}
             <button
