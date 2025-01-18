@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import pillImg from '../assets/bg-pill2.png'
@@ -13,6 +13,9 @@ import pediatricImg from '../assets/pediatric.png'
 import oralImg from '../assets/oral.png'
 import './CalendarStyles.css'
 import Modal from './Modal'
+import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
+import Swal from 'sweetalert2'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const services = [
   { id: 1, name: 'Teeth Orthodontics', icon: orthodonticsImg },
@@ -30,7 +33,24 @@ const Appointment = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedSlot, setSelectedSlot] = useState(null)
 
+  let { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const handleBookClick = slot => {
+    if (!user) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Required',
+        text: 'Please login to book an appointment.',
+        confirmButtonText: "Login",
+        confirmButtonColor: '#F7A582'
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate('/login')
+        }
+      })
+      return
+    }
     setSelectedSlot(slot)
     setIsModalOpen(true)
   }
