@@ -4,11 +4,13 @@ import loginBg from '../../assets/loginBg.png'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { AuthContext } from '../AuthProvider/AuthProvider'
+import useAxiosInstance from '../../Hooks/useAxiosInstance'
 
 const Register = () => {
   let { registerUser, loading, logOut, updateUserProfile } =
     useContext(AuthContext)
   let navigate = useNavigate()
+  let axiosInstance = useAxiosInstance()
 
   const handleRegister = e => {
     e.preventDefault()
@@ -28,29 +30,46 @@ const Register = () => {
       return
     }
 
+    let userInfo = {
+      name: name,
+      email: email,
+      userName: userName,
+      role: "user"
+    }
+
     registerUser(email, password)
       .then(userCredential => {
         const user = userCredential.user
         console.log('User registered:', user)
         updateUserProfile(name, userName).then(() => {
           'User Info Updated'
-        })
-        logOut()
-          .then(() => {
-            console.log('After Sign Up Logged out user to login again')
-            Swal.fire({
-              title: 'Registration Succesfull',
-              text: 'Please Login Now.',
-              icon: 'success'
+          axiosInstance
+            .post('/userRegister', userInfo)
+            .then(res => {
+              console.log(res.data)
+              if (res.data.insertedId) {
+                Swal.fire({
+                  title: 'Register Succesfull',
+                  text: 'Please Login Now.',
+                  icon: 'success'
+                })
+                console.log(user)
+                logOut().then(console.log('Logged Out After Registering'))
+                navigate('/login')
+              }
             })
-            navigate('/login')
-          })
-          .catch(error => {
-            console.error('Error logging out:', error)
-          })
+            .catch(error => {
+              console.timeLog(error)
+            })
+        })
       })
       .catch(error => {
         console.error('Error during registration:', error)
+        Swal.fire({
+          title: 'Error Occured',
+          text: 'User May Exist or Server Issue. Please Try Again',
+          icon: 'error'
+        })
       })
   }
 
