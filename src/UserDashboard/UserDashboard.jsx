@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import logo from '../../src/assets/logo.png'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
+import UserSidebar from './UserSidebar/UserSidebar'
 
 const UserDashboard = () => {
   let { user, logOut } = useContext(AuthContext)
@@ -11,7 +12,7 @@ const UserDashboard = () => {
   }
 
   return (
-    <div className=''>
+    <div>
       <div className='DashboardNavbar h-[13vh] text-white flex items-center z-50 w-full bg-[#07332F]'>
         <div className='w-[95%] lg:w-[1150px] mx-auto flex justify-between items-center'>
           <div>
@@ -59,6 +60,9 @@ const UserDashboard = () => {
             )}
           </div>
         </div>
+      </div>
+      <div className='bg-[#F1F5F9] h-screen'>
+        <UserSidebar></UserSidebar>
       </div>
     </div>
   )
