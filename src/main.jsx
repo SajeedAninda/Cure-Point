@@ -9,6 +9,8 @@ import AuthProvider from './Authentication/AuthProvider/AuthProvider.jsx'
 import Appointment from './Appointment/Appointment.jsx'
 import Homepage from './Homepage/Homepage.jsx'
 import UserDashboard from './UserDashboard/UserDashboard.jsx'
+import UserAppointments from './UserDashboard/UserAppointments/UserAppointments.jsx'
+import UserAppointmentHistory from './UserDashboard/UserAppointmentHistory/UserAppointmentHistory.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,17 @@ const router = createBrowserRouter([
   },
   {
     path: 'user/appointmentBookings',
-    element: <UserDashboard></UserDashboard>
+    element: <UserDashboard></UserDashboard>,
+    children: [
+      {
+        path: '',
+        element: <UserAppointments></UserAppointments>
+      },
+      {
+        path: 'appointmentHistory',
+        element: <UserAppointmentHistory></UserAppointmentHistory>
+      }
+    ]
   }
 ])
 

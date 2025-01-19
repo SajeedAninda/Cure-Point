@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import logo from '../../src/assets/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
 import UserSidebar from './UserSidebar/UserSidebar'
 
@@ -61,8 +61,9 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-      <div className='bg-[#F1F5F9] h-screen'>
+      <div className='bg-[#F1F5F9] h-screen flex justify-between'>
         <UserSidebar></UserSidebar>
+        <Outlet></Outlet>
       </div>
     </div>
   )
