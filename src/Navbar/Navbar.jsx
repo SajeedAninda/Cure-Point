@@ -23,7 +23,6 @@ const Navbar = () => {
     }
   }, [])
 
-  
   let handleLogout = () => {
     logOut().then(console.log('Logged Out Done'))
   }
@@ -40,15 +39,29 @@ const Navbar = () => {
         </div>
 
         <div className='links text-white flex items-center gap-12'>
-          <Link to={"/"} className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
+          <Link
+            to={'/'}
+            className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+          >
             Home
           </Link>
           <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
             About
           </li>
-          <Link to={"/appointment"} className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
+          <Link
+            to={'/appointment'}
+            className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+          >
             Appointment
           </Link>
+          {user && (
+            <Link
+              to={'/user/appointmentBookings'}
+              className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+            >
+              My Bookings
+            </Link>
+          )}
           {user ? (
             <button
               onClick={handleLogout}

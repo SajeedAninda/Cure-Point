@@ -8,6 +8,7 @@ import Register from './Authentication/Register/Register.jsx'
 import AuthProvider from './Authentication/AuthProvider/AuthProvider.jsx'
 import Appointment from './Appointment/Appointment.jsx'
 import Homepage from './Homepage/Homepage.jsx'
+import UserDashboard from './UserDashboard/UserDashboard.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: 'register',
     element: <Register></Register>
+  },
+  {
+    path: 'user/appointmentBookings',
+    element: <UserDashboard></UserDashboard>
   }
 ])
 
