@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useContext } from 'react'
-import logo from '../../src/assets/logo.png'
-import { Link } from 'react-router-dom'
-import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
+import React, { useState, useEffect, useContext } from 'react';
+import logo from '../../src/assets/logo.png';
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../Authentication/AuthProvider/AuthProvider';
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false)
-  let { user, logOut } = useContext(AuthContext)
+  const [scrolled, setScrolled] = useState(false);
+  let { user, logOut } = useContext(AuthContext);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollThreshold = window.innerHeight * 0.17
+      const scrollThreshold = window.innerHeight * 0.17;
       if (window.scrollY > scrollThreshold) {
-        setScrolled(true)
+        setScrolled(true);
       } else {
-        setScrolled(false)
+        setScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   let handleLogout = () => {
-    logOut().then(console.log('Logged Out Done'))
-  }
+    logOut().then(console.log('Logged Out Done'));
+  };
 
   return (
     <div
@@ -35,52 +35,75 @@ const Navbar = () => {
     >
       <div className='w-[95%] lg:w-[1150px] mx-auto flex justify-between items-center'>
         <div>
-          <img className='w-[150px]' src={logo} alt='' />
+          <img className='w-[150px]' src={logo} alt='Logo' />
         </div>
 
         <div className='links text-white flex items-center gap-12'>
-          <Link
-            to={'/'}
-            className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+          <NavLink
+            to='/'
+            className={({ isActive }) =>
+              `text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:underline ${
+                isActive ? 'bg-[#046B63] px-4 py-2 rounded-lg' : ''
+              }`
+            }
           >
             Home
-          </Link>
-          <li className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'>
+          </NavLink>
+          <NavLink
+            to='/about'
+            className={({ isActive }) =>
+              `text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:underline ${
+                isActive ? 'bg-[#046B63] px-4 py-2 rounded-lg' : ''
+              }`
+            }
+          >
             About
-          </li>
-          <Link
-            to={'/appointment'}
-            className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+          </NavLink>
+          <NavLink
+            to='/appointment'
+            className={({ isActive }) =>
+              `text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:underline ${
+                isActive ? 'bg-[#046B63] px-4 py-2 rounded-lg' : ''
+              }`
+            }
           >
             Appointment
-          </Link>
+          </NavLink>
           {user && (
-            <Link
-              to={'/user/appointmentBookings'}
-              className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+            <NavLink
+              to='/user/appointmentBookings'
+              className={({ isActive }) =>
+                `text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:underline ${
+                  isActive ? 'bg-[#046B63] px-4 py-2 rounded-lg' : ''
+                }`
+              }
             >
               My Bookings
-            </Link>
+            </NavLink>
           )}
           {user ? (
             <button
               onClick={handleLogout}
-              className='transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:text-red-500 hover:underline'
+              className='text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:text-red-500 hover:underline'
             >
               Log Out
             </button>
           ) : (
-            <Link
-              to={'/login'}
-              className='hover:opacity-70 transition-opacity text-[18px] font-semibold duration-300 ease-in-out cursor-pointer list-none hover:underline'
+            <NavLink
+              to='/login'
+              className={({ isActive }) =>
+                `text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:underline ${
+                  isActive ? 'bg-[#046B63] px-4 py-2 rounded-lg' : ''
+                }`
+              }
             >
               Login
-            </Link>
+            </NavLink>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
