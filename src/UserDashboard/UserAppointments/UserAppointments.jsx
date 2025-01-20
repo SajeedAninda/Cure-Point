@@ -1,11 +1,38 @@
 import React from 'react'
 import { FaTrash } from 'react-icons/fa'
 import useAppointmentData from '../../Hooks/useAppointmentData'
+import useAxiosInstance from '../../Hooks/useAxiosInstance'
+import Swal from 'sweetalert2'
 
 const UserAppointments = () => {
   let { appointmentData, refetch } = useAppointmentData()
+  let axiosInstance = useAxiosInstance()
 
-  console.log(appointmentData)
+  let handleDelete = id => {
+    Swal.fire({
+      title: 'Do you want to Delete this Appointment?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.isConfirmed) {
+        axiosInstance.delete(`/userAppointment/${id}`).then(res => {
+          console.log()
+          if (res.data.deletedCount) {
+            refetch()
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success'
+            })
+          }
+        })
+      }
+    })
+  }
 
   return (
     <div className='w-[75%] text-[22px] px-10 py-6'>
@@ -23,7 +50,7 @@ const UserAppointments = () => {
           <div className='col-span-1'>Delete</div>
         </div>
 
-        {appointmentData.map((data, index) => {
+        {appointmentData?.map((data, index) => {
           return (
             <div className='w-full py-3 grid grid-cols-12 items-center bg-white text-[#898989] text-[14px] font-semibold'>
               <div className='col-span-1 flex justify-center'>{index + 1}</div>
@@ -37,7 +64,10 @@ const UserAppointments = () => {
                 </button>
               </div>
               <div className='col-span-1'>
-                <button className='px-4 py-4 bg-red-600 text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'>
+                <button
+                  onClick={() => handleDelete(data?._id)}
+                  className='px-4 py-4 bg-red-600 text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'
+                >
                   <FaTrash />
                 </button>
               </div>
