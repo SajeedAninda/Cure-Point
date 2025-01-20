@@ -1,7 +1,12 @@
 import React from 'react'
 import { FaTrash } from 'react-icons/fa'
+import useAppointmentData from '../../Hooks/useAppointmentData'
 
 const UserAppointments = () => {
+  let { appointmentData, refetch } = useAppointmentData()
+
+  console.log(appointmentData)
+
   return (
     <div className='w-[75%] text-[22px] px-10 py-6'>
       <h3 className='text-[#191919] text-[22px] font-bold'>
