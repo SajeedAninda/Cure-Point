@@ -1,4 +1,8 @@
-import React from 'react';
+import React from 'react'
+import { FaTrash } from 'react-icons/fa'
+import useAppointmentData from '../../Hooks/useAppointmentData'
+import useAxiosInstance from '../../Hooks/useAxiosInstance'
+import Swal from 'sweetalert2'
 
 const UserAppointmentHistory = () => {
     return (

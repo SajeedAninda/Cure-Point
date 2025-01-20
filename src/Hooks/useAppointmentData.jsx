@@ -8,7 +8,7 @@ const useAppointmentData = () => {
   let axiosInstance = useAxiosInstance();
   let userEmail = user?.email
 
-  const { data: appointmentData, refetch } = useQuery({
+  const { data: appointmentData,isLoading:loading, refetch } = useQuery({
     queryKey: ['appointments', user?.email],
     queryFn: async () => {
       const response = await axiosInstance.get(`/userAppointments?email=${userEmail}`);
@@ -19,6 +19,7 @@ const useAppointmentData = () => {
 
   return {
     appointmentData,
+    loading,
     refetch
   };
 };
