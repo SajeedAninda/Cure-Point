@@ -25,7 +25,8 @@ const Modal = ({
       phoneNumber,
       selectedService,
       selectedTime,
-      selectedDate
+      selectedDate,
+      paymentStatus: 'unpaid'
     }
 
     try {

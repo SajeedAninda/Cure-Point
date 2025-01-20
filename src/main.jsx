@@ -11,6 +11,13 @@ import Homepage from './Homepage/Homepage.jsx'
 import UserDashboard from './UserDashboard/UserDashboard.jsx'
 import UserAppointments from './UserDashboard/UserAppointments/UserAppointments.jsx'
 import UserAppointmentHistory from './UserDashboard/UserAppointmentHistory/UserAppointmentHistory.jsx'
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
+
+// Tanstack query client
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -53,8 +60,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 )
