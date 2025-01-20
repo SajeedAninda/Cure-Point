@@ -23,23 +23,27 @@ const UserAppointments = () => {
           <div className='col-span-1'>Delete</div>
         </div>
 
-        <div className='w-full py-3 grid grid-cols-12 items-center bg-white text-[#898989] text-[14px] font-semibold'>
-          <div className='col-span-1 flex justify-center'>01</div>
-          <div className='col-span-3'>Wade Warren</div>
-          <div className='col-span-2'>01/01/2025</div>
-          <div className='col-span-2'>06:41 pm</div>
-          <div className='col-span-2'>Cavity Protection</div>
-          <div className='col-span-1'>
-            <button className='px-4 py-3 bg-[#07332F] text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'>
-              Pay
-            </button>
-          </div>
-          <div className='col-span-1'>
-            <button className='px-4 py-4 bg-red-600 text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'>
-              <FaTrash />
-            </button>
-          </div>
-        </div>
+        {appointmentData.map((data, index) => {
+          return (
+            <div className='w-full py-3 grid grid-cols-12 items-center bg-white text-[#898989] text-[14px] font-semibold'>
+              <div className='col-span-1 flex justify-center'>{index + 1}</div>
+              <div className='col-span-3'>{data?.name}</div>
+              <div className='col-span-2'>{data?.selectedDate}</div>
+              <div className='col-span-2'>{data?.selectedTime}</div>
+              <div className='col-span-2'>{data?.selectedService?.name}</div>
+              <div className='col-span-1'>
+                <button className='px-4 py-3 bg-[#07332F] text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'>
+                  Pay
+                </button>
+              </div>
+              <div className='col-span-1'>
+                <button className='px-4 py-4 bg-red-600 text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'>
+                  <FaTrash />
+                </button>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
