@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import logo from '../../src/assets/logo.png'
-import { Link, NavLink, Outlet } from 'react-router-dom'
 import { AuthContext } from '../Authentication/AuthProvider/AuthProvider'
-import UserSidebar from './UserSidebar/UserSidebar'
+import { NavLink, Outlet } from 'react-router-dom'
+import AdminSidebar from './AdminSidebar/AdminSidebar'
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
   let { user, logOut } = useContext(AuthContext)
 
   let handleLogout = () => {
@@ -52,14 +52,14 @@ const UserDashboard = () => {
             </NavLink>
             {user && (
               <NavLink
-                to='/user/appointmentBookings'
+                to='/adminDashboard'
                 className={({ isActive }) =>
                   `text-[18px] font-semibold transition-opacity duration-300 ease-in-out cursor-pointer list-none hover:underline ${
                     isActive ? 'bg-[#046B63] px-4 py-2 rounded-lg' : ''
                   }`
                 }
               >
-                My Bookings
+                Dashboard
               </NavLink>
             )}
             {user ? (
@@ -85,11 +85,11 @@ const UserDashboard = () => {
         </div>
       </div>
       <div className='bg-[#F1F5F9] h-screen flex justify-between'>
-        <UserSidebar></UserSidebar>
+        <AdminSidebar></AdminSidebar>
         <Outlet></Outlet>
       </div>
     </div>
   )
 }
 
-export default UserDashboard
+export default AdminDashboard

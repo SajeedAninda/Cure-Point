@@ -11,10 +11,8 @@ import Homepage from './Homepage/Homepage.jsx'
 import UserDashboard from './UserDashboard/UserDashboard.jsx'
 import UserAppointments from './UserDashboard/UserAppointments/UserAppointments.jsx'
 import UserAppointmentHistory from './UserDashboard/UserAppointmentHistory/UserAppointmentHistory.jsx'
-import {
-  QueryClient,
-  QueryClientProvider
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import AdminDashboard from './AdminDashboard/AdminDashboard.jsx'
 
 // Tanstack query client
 const queryClient = new QueryClient()
@@ -45,6 +43,20 @@ const router = createBrowserRouter([
   {
     path: 'user/appointmentBookings',
     element: <UserDashboard></UserDashboard>,
+    children: [
+      {
+        path: '',
+        element: <UserAppointments></UserAppointments>
+      },
+      {
+        path: 'appointmentHistory',
+        element: <UserAppointmentHistory></UserAppointmentHistory>
+      }
+    ]
+  },
+  {
+    path: 'adminDashboard',
+    element: <AdminDashboard></AdminDashboard>,
     children: [
       {
         path: '',
