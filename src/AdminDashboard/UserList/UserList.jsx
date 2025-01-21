@@ -50,21 +50,35 @@ const UserList = () => {
               className='w-full py-3 grid grid-cols-12 items-center bg-white text-[#898989] text-[14px] font-semibold'
             >
               <div className='col-span-1 flex justify-center'>{index + 1}</div>
-              <div className='col-span-3 flex justify-center'>{data.name}</div>
-              <div className='col-span-2 flex justify-center'>{data.email}</div>
-              <div className='col-span-2 flex justify-center uppercase'>{data.role}</div>
+              <div className='col-span-3 flex justify-center'>{data?.name}</div>
+              <div className='col-span-2 flex justify-center'>
+                {data?.email}
+              </div>
+              <div className='col-span-2 flex justify-center uppercase'>
+                {data?.role}
+              </div>
               <div className='col-span-2'>
                 <button
-                  onClick={() => handleDelete(data._id)}
-                  className='px-4 py-3 bg-[#07332F] text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'
+                  onClick={() => handleDelete(data?._id)}
+                  className={`px-4 py-3 rounded-lg transition-all duration-150 ${
+                    data?.role === 'admin'
+                      ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                      : 'bg-[#07332F] text-white hover:bg-opacity-50'
+                  }`}
+                  disabled={data?.role === 'admin'}
                 >
                   Make Admin
                 </button>
               </div>
               <div className='col-span-2'>
                 <button
-                  onClick={() => handleDelete(data._id)}
-                  className='px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-opacity-50 transition-all duration-150'
+                  onClick={() => handleDelete(data?._id)}
+                  className={`px-4 py-3 rounded-lg transition-all duration-150 ${
+                    data?.role === 'admin'
+                      ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                      : 'bg-red-600 text-white hover:bg-opacity-50'
+                  }`}
+                  disabled={data?.role === 'admin'}
                 >
                   Remove User
                 </button>
