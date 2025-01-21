@@ -13,6 +13,7 @@ import UserAppointments from './UserDashboard/UserAppointments/UserAppointments.
 import UserAppointmentHistory from './UserDashboard/UserAppointmentHistory/UserAppointmentHistory.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import AdminDashboard from './AdminDashboard/AdminDashboard.jsx'
+import UserList from './AdminDashboard/UserList/UserList.jsx'
 
 // Tanstack query client
 const queryClient = new QueryClient()
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <UserAppointments></UserAppointments>
+        element: <UserList></UserList>
       },
       {
         path: 'appointmentHistory',
