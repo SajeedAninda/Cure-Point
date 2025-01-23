@@ -16,7 +16,7 @@ const AdminSidebar = () => {
         <ImUsers />
       </Link>
       <Link
-        to={'/admin/addDoctos'}
+        to={'addDoctors'}
         className='text-[#898989] font-semibold text-[20px] hover:bg-[#F1F5F9] hover:text-[#191919] transition-all duration-150 w-full py-6 flex justify-center items-center gap-2'
       >
         Add Doctors
