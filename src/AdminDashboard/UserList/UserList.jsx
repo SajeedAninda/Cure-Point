@@ -1,12 +1,12 @@
 import React from 'react'
 import useAxiosInstance from '../../Hooks/useAxiosInstance'
 import { useQuery } from '@tanstack/react-query'
-import { FaTrash } from 'react-icons/fa'
+import Swal from 'sweetalert2'
 
 const UserList = () => {
   let axiosInstance = useAxiosInstance()
 
-  const { data: users, isLoading: isUserLoading } = useQuery({
+  const { data: users, isLoading: isUserLoading, refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const response = await axiosInstance.get(`/allUsers`)
@@ -14,7 +14,30 @@ const UserList = () => {
     }
   })
 
-  console.log(users)
+  let handleDelete = id => {
+      Swal.fire({
+        title: 'Do you want to Delete this User?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(result => {
+        if (result.isConfirmed) {
+          axiosInstance.delete(`/deleteUser/${id}`).then(res => {
+            if (res.data.deletedCount) {
+              refetch()
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'The User has been deleted.',
+                icon: 'success'
+              })
+            }
+          })
+        }
+      })
+    }
 
   if (isUserLoading) {
     return (
@@ -59,7 +82,7 @@ const UserList = () => {
               </div>
               <div className='col-span-2'>
                 <button
-                  onClick={() => handleDelete(data?._id)}
+                  onClick={() => handleMakeAdmin(data?._id)}
                   className={`px-4 py-3 rounded-lg transition-all duration-150 ${
                     data?.role === 'admin'
                       ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
