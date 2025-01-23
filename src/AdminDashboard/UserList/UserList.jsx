@@ -6,7 +6,11 @@ import Swal from 'sweetalert2'
 const UserList = () => {
   let axiosInstance = useAxiosInstance()
 
-  const { data: users, isLoading: isUserLoading, refetch } = useQuery({
+  const {
+    data: users,
+    isLoading: isUserLoading,
+    refetch
+  } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const response = await axiosInstance.get(`/allUsers`)
@@ -15,29 +19,66 @@ const UserList = () => {
   })
 
   let handleDelete = id => {
-      Swal.fire({
-        title: 'Do you want to Delete this User?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then(result => {
-        if (result.isConfirmed) {
-          axiosInstance.delete(`/deleteUser/${id}`).then(res => {
-            if (res.data.deletedCount) {
-              refetch()
-              Swal.fire({
-                title: 'Deleted!',
-                text: 'The User has been deleted.',
-                icon: 'success'
-              })
-            }
-          })
-        }
-      })
-    }
+    Swal.fire({
+      title: 'Do you want to Delete this User?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then(result => {
+      if (result.isConfirmed) {
+        axiosInstance.delete(`/deleteUser/${id}`).then(res => {
+          if (res.data.deletedCount) {
+            refetch()
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The User has been deleted.',
+              icon: 'success'
+            })
+          }
+        })
+      }
+    })
+  }
+
+  let handleMakeAdmin = id => {
+    Swal.fire({
+      title: 'Do you want to make this user an Admin?',
+      text: 'Are You 100% Sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Sure'
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Again Confirm to Make this User an Admin?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, I want'
+        }).then(result => {
+          if (result.isConfirmed) {
+            axiosInstance.patch(`/makeAdmin/${id}`).then(res => {
+              if (res.data.modifiedCount >= 1) {
+                refetch()
+                Swal.fire({
+                  title: 'Done!',
+                  text: 'You Have Created a New Admin',
+                  icon: 'success'
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+  }
 
   if (isUserLoading) {
     return (
