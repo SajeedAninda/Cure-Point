@@ -84,7 +84,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-      <div className='bg-[#F1F5F9] h-screen flex justify-between'>
+      <div className='bg-[#F1F5F9] h-[130vh] flex justify-between'>
         <AdminSidebar></AdminSidebar>
         <Outlet></Outlet>
       </div>
