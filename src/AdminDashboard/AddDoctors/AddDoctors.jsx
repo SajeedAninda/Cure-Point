@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaUpload } from 'react-icons/fa'
 import useAxiosInstance from '../../Hooks/useAxiosInstance'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 const AddDoctors = () => {
   const [doctorName, setDoctorName] = useState('')
@@ -9,6 +10,8 @@ const AddDoctors = () => {
   const [speciality, setSpeciality] = useState('')
   const [imageFile, setImageFile] = useState(null)
   const [imageUrl, setImageUrl] = useState('')
+
+  const navigate = useNavigate();
 
   const imgBBAPI = 'cbd289d81c381c05afbab416f87e8637'
   let axiosInstance = useAxiosInstance()
@@ -21,7 +24,7 @@ const AddDoctors = () => {
     event.preventDefault()
 
     if (!imageFile || !doctorName || !doctorEmail || !speciality) {
-      Swal.error({
+      Swal.fire({
         icon: 'error',
         title: 'Oops',
         text: 'Please submit all fields correctly'
@@ -48,6 +51,15 @@ const AddDoctors = () => {
         image: uploadedImageUrl
       }
 
+      axiosInstance.post('/addDoctors', doctorDetails).then(res => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Doctor is Added',
+            text: 'You Have Succesfully Added the Doctor'
+          })
+        }
+      })
     }
   }
 
